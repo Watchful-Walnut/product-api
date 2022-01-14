@@ -1,0 +1,23 @@
+{
+  "name": "product-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Watchful-Walnut/product-api.git#main"
+  },
+  "author": "Brandon Tsai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Watchful-Walnut/product-api/issues"
+  },
+  "homepage": "https://github.com/Watchful-Walnut/product-api/tree/main#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "express": "^4.17.2"
+  }
+}
