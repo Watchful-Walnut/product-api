@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Watchful-Walnut/product-api/tree/main#readme",
   "dependencies": {
     "axios": "^0.24.0",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "pg": "^8.7.1"
   }
 }
