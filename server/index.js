@@ -8,6 +8,7 @@ app.use(express.json());
 
 app.get('/api/products', controller.getProducts);
 app.get('/api/products/:product_id', controller.getSingleProduct);
+app.get('/api/products/:product_id/styles', controller.getStyles);
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
