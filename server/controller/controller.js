@@ -11,6 +11,7 @@ module.exports = {
         })
         .catch((error) => {
           console.log(error);
+          res.status(400).send(error);
         });
     } else {
       res.status(400).send('Please provide a page/count above 0.')
@@ -24,7 +25,7 @@ module.exports = {
         })
         .catch((error) => {
           console.log(error);
-          res.send(error);
+          res.status(400).send(error);
         });
     } else {
       res.status(400).send('Please provide a valid product id.')
@@ -41,7 +42,17 @@ module.exports = {
       })
       .catch((error) => {
         console.log(error);
-        res.send(error);
+        res.status(400).send(error);
+      })
+  },
+  getRelated: (req, res) => {
+    model.getRelated(req.params.product_id)
+      .then((response) => {
+        res.send(response.rows[0].json_agg);
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(400).send(error);
       })
   }
 }

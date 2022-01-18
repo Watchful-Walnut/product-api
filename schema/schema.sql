@@ -59,4 +59,10 @@ CREATE TABLE related (
   related_product_id INTEGER NOT NULL
 );
 
+CREATE INDEX ON styles (product_id);
+CREATE INDEX ON style_skus (style_id);
+CREATE INDEX ON style_photos (style_id);
+CREATE INDEX ON features (product_id);
+CREATE INDEX ON related (current_product_id);
+
 --primary product and related product id

@@ -63,5 +63,17 @@ module.exports = {
       values: [product_id]
     }
     return db.query(query);
+  },
+  getRelated: (product_id) => {
+    const query = {
+      text: `SELECT
+        json_agg(
+          related_product_id
+        )
+        FROM related
+        WHERE current_product_id = $1`,
+      values: [product_id]
+    }
+    return db.query(query);
   }
 }
