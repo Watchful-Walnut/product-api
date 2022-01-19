@@ -38,7 +38,7 @@ module.exports = {
           product_id: req.params.product_id,
           results: response.rows[0].results
         }
-        res.send(results);
+        res.send(response.rows);
       })
       .catch((error) => {
         console.log(error);
@@ -54,45 +54,5 @@ module.exports = {
         console.log(error);
         res.status(400).send(error);
       })
-  },
-  getSingleProductTest: (req, res) => {
-    req.params.product_id = Math.floor(Math.random() * (200000) + 1);
-
-    model.getSingleProduct(req.params.product_id)
-      .then((response) => {
-        res.send(response.rows);
-      })
-      .catch((error) => {
-        console.log(error);
-        res.status(400).send(erorr);
-      })
-  },
-  getStylesTest: (req, res) => {
-    req.params.product_id = Math.floor(Math.random() * (200000) + 1);
-
-    model.getStyles(req.params.product_id)
-    .then((response) => {
-      const results = {
-        product_id: req.params.product_id,
-        results: response.rows[0].results
-      }
-      res.send(results);
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(400).send(error);
-    })
-  },
-  getRelatedTest: (req, res) => {
-    req.params.product_id = Math.floor(Math.random() * (200000) + 1);
-
-    model.getRelated(req.params.product_id)
-    .then((response) => {
-      res.send(response.rows[0].json_agg);
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(400).send(error);
-    })
   }
 }

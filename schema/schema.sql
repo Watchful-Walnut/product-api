@@ -42,15 +42,6 @@ CREATE TABLE style_skus (
   REFERENCES styles(id)
 );
 
-CREATE TABLE features (
-  id SERIAL PRIMARY KEY NOT NULL UNIQUE,
-  product_id INTEGER NOT NULL,
-  feature VARCHAR(50) NOT NULL,
-  value TEXT,
-  FOREIGN KEY(product_id)
-  REFERENCES product(id)
-);
-
 CREATE TABLE related (
   id SERIAL PRIMARY KEY NOT NULL UNIQUE,
   current_product_id INTEGER NOT NULL,

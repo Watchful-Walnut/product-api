@@ -9,7 +9,8 @@ export const options = {
   duration: '15s'
 }
 
-const url = 'http://localhost:3000/test/styles';
+const randomID = Math.floor(Math.random() * (200000) + 1);
+const url = `http://localhost:3000/products/5/styles`;
 
 export default function () {
   const res = http.get(url);
