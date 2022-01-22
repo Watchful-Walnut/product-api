@@ -27,39 +27,30 @@ module.exports = {
           'original_price', styles.original_price,
           'sale_price', styles.sale_price,
           'default?', styles.isDefault,
-          'photos', photos,
-          'skus', skus
+          'photos', (SELECT coalesce(style_photos, '[]'::json)
+              FROM (
+              SELECT json_agg(
+              json_build_object(
+                  'thumbnail_url', style_photos.thumbnail_url,
+                  'url', style_photos.regular_url
+              )
+              ) AS style_photos from style_photos WHERE style_photos.style_id = styles.id
+              ) as photos
+                    ),
+            'skus', (SELECT coalesce(style_skus, '{}'::json)
+                    FROM (
+                        SELECT
+                        json_object_agg(
+                            style_skus.id,
+                            json_build_object(
+                                'quantity', style_skus.quantity,
+                                'size', style_skus.size
+                            )
+                        ) AS style_skus from style_skus WHERE style_skus.style_id = styles.id
+                    ) as skus
+                    )
         )
-      ) results
-    FROM styles
-    INNER JOIN (
-      SELECT
-        style_id,
-        json_agg(
-          json_build_object(
-            'thumbnail_url', style_photos.thumbnail_url,
-            'url', style_photos.regular_url
-          )
-        ) photos
-      FROM
-        style_photos
-      GROUP BY style_id
-    ) style_photos ON (styles.id = style_photos.style_id)
-    INNER JOIN (
-      SELECT
-        style_id,
-        json_object_agg(
-          style_skus.id,
-          json_build_object(
-            'quantity', style_skus.quantity,
-            'size', style_skus.size
-          )
-        ) skus
-      FROM
-        style_skus
-      GROUP BY style_id
-    ) style_skus ON (styles.id = style_skus.style_id)
-    WHERE product_id = $1`,
+      ) AS results from styles where styles.product_id = $1`,
       values: [product_id]
     }
     return db.query(query);
